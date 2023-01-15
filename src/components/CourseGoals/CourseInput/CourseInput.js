@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import Button from "../../UI/Button/Button";
-// delete CourceInput.css
 
 const FormControl = styled.div`
   & {
@@ -13,12 +12,14 @@ const FormControl = styled.div`
     font-weight: bold;
     display: block;
     margin-bottom: 0.5rem;
+    color: ${(props) => (props.invalid ? "red" : "black")};
   }
 
   & input {
     display: block;
     width: 100%;
-    border: 1px solid #ccc;
+    border: 1px solid ${(props) => (props.invalid ? "#ff5c5c" : "#ccc")};
+    background-color: ${(props) => (props.invalid ? "#ffd3d3" : "white")};
     font: inherit;
     line-height: 1.5rem;
     padding: 0 0.25rem;
@@ -56,14 +57,14 @@ const CourseInput = (props) => {
 
   return (
     <form onSubmit={formSubmitHandler}>
-      <div className="form-control">
+      <FormControl invalid={!isValid}>
         <label>Course Goal</label>
         <input
           type="text"
           value={enteredValue}
           onChange={goalInputChangeHandler}
         />
-      </div>
+      </FormControl>
       <Button type="submit">Add Goal</Button>
     </form>
   );
